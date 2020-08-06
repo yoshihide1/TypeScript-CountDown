@@ -10,28 +10,40 @@
 </head>
 
 <body>
+  <header class="header">
+    <div>
+      <p>CountDownTimer</p>
+    </div>
+  </header>
+  <div class="count__down">
+    <div><span class="count__down__font">Work</span>
+      <p id="count__down__work" class="count__down__number">0</p>
+    </div>
+    <!-- <div><span id="main__count">0</span></div> -->
+    <div><span class="count__down__font">Interval</span>
+      <p id="count__down__interval" class="count__down__number">0</p>
+    </div>
+  </div>
   <div class="count__set">
     <div>
       <p>Work</p>
       <select name="" id="set__work__min"></select>分
       <select name="" id="set__work__sec"></select>秒
     </div>
-      <button id="count__start">スタート</button>
-      <button id="count__reset">リセット</button>
-      <button id="count__stop">ストップ</button>
+
     <div>
       <p>Interval</p>
       <select name="" id="set__interval__min"></select>分
       <select name="" id="set__interval__sec"></select>秒
     </div>
   </div>
-  <div class="count__down">
-    <div><span class="count__down__font">Work</span>
-      <p id="count__down__work" class="count__down__number">0</p>
-    </div>
-    <div><span class="count__down__font">Interval</span>
-      <p id="count__down__interval" class="count__down__number">0</p>
-    </div>
+  <div>
+    繰り返し<select name="" id="loop"></select>
+  </div>
+  <div class="count__button">
+    <button id="count__start">スタート</button>
+    <button id="count__reset">リセット</button>
+    <button id="count__stop">ストップ</button>
   </div>
 </body>
 

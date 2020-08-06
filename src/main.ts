@@ -29,11 +29,20 @@ class NumberSet {
   }
   setSecInterval(): void {
     const count = document.getElementById('set__interval__sec')!
-    for (let i = 0; i <= 50; i += 10) {
+    for (let i = 10; i <= 50; i += 10) {
       const option = document.createElement('option')
       option.text = String(i)
       option.value = String(i)
       count.appendChild(option)
+    }
+  }
+  setLoop(): void {
+    const loop = document.getElementById('loop')!
+    for (let i = 1; i <= 10; i++) {
+      const option = document.createElement('option')
+      option.text = String(i)
+      option.value = String(i)
+      loop.appendChild(option)
     }
   }
 }
@@ -42,10 +51,15 @@ selectNumber.setSecInterval()
 selectNumber.setMinInterval()
 selectNumber.setSecWork()
 selectNumber.setMinWork()
+selectNumber.setLoop()
 
 
 abstract class NumberGet {
 
+  mainCount(): HTMLElement {
+    const count = (<HTMLElement>document.getElementById('main__count'))
+    return count
+  }
   setWork(): number {
     let min: string | number = (<HTMLInputElement>document.getElementById('set__work__min')).value
     let sec: string | number = (<HTMLInputElement>document.getElementById('set__work__sec')).value
@@ -84,48 +98,53 @@ abstract class NumberGet {
 
 }
 
+
+
+
 class CountStart extends NumberGet {
   work: any
   interval: any
+  num: number
   constructor() {
     super()
     this.work = 0
     this.interval = 0
-
+    this.num = 0
   }
 
   start(): void {
-    const startButton: any = numberGet.startElement()
-    startButton.addEventListener('click', () => {
+    button['start'].addEventListener('click', () => {
       const workSecJudge = Number(numberGet.getWork().innerText)
       const intervalSecJudge = Number(numberGet.getInterval().innerText)
-      startButton.disabled = true
+      button['start'].disabled = true
+      button['stop'].disabled = false
+      button['reset'].disabled = true
       if (workSecJudge == 0 && intervalSecJudge == 0) {
         const workSec = numberGet.setWork()
         const intervalSec = numberGet.setInterval()
         this.countDown(workSec, intervalSec)
-      } else {
+      }
+       else {
         this.countDown(workSecJudge, intervalSecJudge)
       }
     })
   }
-  // stop(): void {
-  //   const countStop = numberGet.stopElement()
-  //   const startButton: any = numberGet.startElement()
-  //   countStop.addEventListener('click', () => {
-  //     startButton.disabled = false
-  //     clearInterval(this.work)
-  //     clearInterval(this.interval)
-  //   })
-  // }
+  stop(): void {
+    button['stop'].disabled = true
+    button['stop'].addEventListener('click', () => {
+      button['start'].disabled = false
+      button['reset'].disabled = false
+      button['stop'].disabled = true
+      clearInterval(this.work)
+      clearInterval(this.interval)
+    })
+  }
   reset(): void {
-    const countReset = numberGet.resetElement()
-    const startButton: any = numberGet.startElement()
-    countReset.addEventListener('click', () => {
-      console.log()
-      startButton.disabled = false
-
-
+    button['reset'].disabled = true
+    button['reset'].addEventListener('click', () => {
+      button['start'].disabled = false
+      numberGet.getWork().innerText = "0"
+      numberGet.getInterval().innerText = "0"
     })
   }
 
@@ -157,11 +176,18 @@ class CountStart extends NumberGet {
         clearInterval(this.interval)
         const startButton: any = numberGet.startElement()
         startButton.disabled = false
+        // this.countLoop()
       }
     }, 1000)
   }
 }
 const numberGet = new CountStart()
+
+const button: any = {
+  start: numberGet.startElement(),
+  stop: numberGet.stopElement(),
+  reset: numberGet.resetElement()
+}
 numberGet.start()
 numberGet.stop()
 numberGet.reset()

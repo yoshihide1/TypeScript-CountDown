@@ -1,5 +1,18 @@
 body {
+  margin: 0;
   background-color: antiquewhite;
+  text-align: center;
+}
+p {
+  margin: 0;
+}
+.header {
+  background-color: blue;
+  width: 100%;
+  height: 60px;
+}
+#main__count {
+  font-size: 3rem;
 }
 .count__set {
   display: flex;
