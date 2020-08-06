@@ -1,0 +1,15 @@
+body {
+  background-color: antiquewhite;
+}
+.count__set {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.count__down {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+}
