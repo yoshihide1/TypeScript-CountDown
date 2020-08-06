@@ -17,7 +17,6 @@ export class NumberSet {
       count.appendChild(option)
     }
   }
-
   setSecWork(): void {
     const count = document.getElementById('set__work__sec')!
     for (let i = 0; i <= 50; i += 10) {

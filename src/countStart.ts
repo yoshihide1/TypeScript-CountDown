@@ -9,6 +9,11 @@ export class CountStart extends NumberGet {
     this.work = 0
     this.interval = 0
     this.num = 0
+    this.button = {
+      start: super.startElement(),
+      stop: super.stopElement(),
+      reset: super.resetElement()
+    }
   }
   loop(loop?: string): void {
     if (loop) {
@@ -94,13 +99,3 @@ export class CountStart extends NumberGet {
     }, 1000)
   }
 }
-// const numberGet = new CountStart()
-// numberGet.start()
-// numberGet.stop()
-// numberGet.reset()
-// const button: any = {
-//   start: numberGet.startElement(),
-//   stop: numberGet.stopElement(),
-//   reset: numberGet.resetElement()
-// }
-// export default(numberGet)
