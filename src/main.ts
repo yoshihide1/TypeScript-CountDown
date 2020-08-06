@@ -56,9 +56,13 @@ selectNumber.setLoop()
 
 abstract class NumberGet {
 
-  mainCount(): HTMLElement {
-    const count = (<HTMLElement>document.getElementById('main__count'))
-    return count
+  // mainCount(): HTMLElement {
+  //   const count = (<HTMLElement>document.getElementById('main__count'))
+  //   return count
+  // }
+  setLoop() {
+    let loop = (<HTMLInputElement>document.getElementById('loop')).value
+    return loop
   }
   setWork(): number {
     let min: string | number = (<HTMLInputElement>document.getElementById('set__work__min')).value
@@ -111,6 +115,15 @@ class CountStart extends NumberGet {
     this.interval = 0
     this.num = 0
   }
+  loop(loop?: string): void {
+    if (loop) {
+      console.log('loop')
+      const workSec = numberGet.setWork()
+      const intervalSec = numberGet.setInterval()
+      this.countDown(workSec, intervalSec)
+    }
+
+  }
 
   start(): void {
     button['start'].addEventListener('click', () => {
@@ -123,8 +136,7 @@ class CountStart extends NumberGet {
         const workSec = numberGet.setWork()
         const intervalSec = numberGet.setInterval()
         this.countDown(workSec, intervalSec)
-      }
-       else {
+      } else {
         this.countDown(workSecJudge, intervalSecJudge)
       }
     })
@@ -157,8 +169,7 @@ class CountStart extends NumberGet {
       if (count > 0) {
         workTime.innerHTML = String((count--) - 1)
         console.log(count)
-      }
-      if (count <= 0) {
+      } else {
         console.log('Interval')
         this.intervalCountDown(count, interval)
         clearInterval(this.work)
@@ -166,18 +177,27 @@ class CountStart extends NumberGet {
     }, 1000)
   }
   intervalCountDown(count: number, interval: number): void {
+    const loopNum = Number(numberGet.setLoop())
+    console.log(this.num)
+    this.num++
+    console.log(this.num)
     console.log(count)
     const intervalTime = this.getInterval()
     this.interval = setInterval(() => {
       intervalTime.innerHTML = String((interval--) - 1)
       console.log(interval)
-      if (interval === 0) {
+
+      if (interval === 0 && this.num == loopNum) {
+        this.num = 0
+        console.log('end')
+        clearInterval(this.interval)
+        button['start'].disabled = false
+      } else if (interval === 0) {
         console.log('Start')
         clearInterval(this.interval)
-        const startButton: any = numberGet.startElement()
-        startButton.disabled = false
-        // this.countLoop()
+        this.loop('loop')
       }
+
     }, 1000)
   }
 }
