@@ -56,10 +56,10 @@ selectNumber.setLoop()
 
 abstract class NumberGet {
 
-  // mainCount(): HTMLElement {
-  //   const count = (<HTMLElement>document.getElementById('main__count'))
-  //   return count
-  // }
+  mainCount(): HTMLElement {
+    const count = (<HTMLElement>document.getElementById('main__count'))
+    return count
+  }
   setLoop() {
     let loop = (<HTMLInputElement>document.getElementById('loop')).value
     return loop
@@ -163,37 +163,38 @@ class CountStart extends NumberGet {
   countDown(count: number, interval: number): void {
     const workTime = numberGet.getWork()
     const intervalTime = numberGet.getInterval()
+    const mainCount = numberGet.mainCount()
     intervalTime.innerHTML = String(interval)
     workTime.innerHTML = String(count)
     this.work = setInterval(() => {
       if (count > 0) {
-        workTime.innerHTML = String((count--) - 1)
-        console.log(count)
+        // workTime.innerHTML = String((count--) - 1)
+        mainCount.innerHTML = `<p>Work</p><p>${String((count--) - 1)}</p>`
       } else {
         console.log('Interval')
-        this.intervalCountDown(count, interval)
+        this.intervalCountDown(interval)
         clearInterval(this.work)
       }
     }, 1000)
   }
-  intervalCountDown(count: number, interval: number): void {
+  intervalCountDown(interval: number): void {
     const loopNum = Number(numberGet.setLoop())
-    console.log(this.num)
-    this.num++
-    console.log(this.num)
-    console.log(count)
     const intervalTime = this.getInterval()
-    this.interval = setInterval(() => {
-      intervalTime.innerHTML = String((interval--) - 1)
-      console.log(interval)
+    const mainCount = numberGet.mainCount()
 
-      if (interval === 0 && this.num == loopNum) {
-        this.num = 0
-        console.log('end')
-        clearInterval(this.interval)
-        button['start'].disabled = false
+    this.num++
+    this.interval = setInterval(() => {
+      // intervalTime.innerHTML = String((interval--) - 1)
+        mainCount.innerHTML = `<p>Interval</p><p>${String((interval--) - 1)}</p>`
+        
+        if (interval === 0 && this.num >= loopNum) {
+          this.num = 0
+          console.log('end')
+          clearInterval(this.interval)
+          button['start'].disabled = false
+          button['stop'].disabled = true
+          mainCount.innerHTML = `<p>おわり</p>`
       } else if (interval === 0) {
-        console.log('Start')
         clearInterval(this.interval)
         this.loop('loop')
       }

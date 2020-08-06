@@ -1,28 +1,106 @@
 body {
   margin: 0;
-  background-color: antiquewhite;
+  background-color: #e6e5ef;
   text-align: center;
 }
+
 p {
   margin: 0;
 }
+
 .header {
-  background-color: blue;
+  color: #ced7dc;
+  background-color: #3e3a3a;
   width: 100%;
   height: 60px;
+  line-height: 60px;
+  font-size: 1.7rem;
+  font-weight: bolder;
+  text-align: left;
 }
+
+.header p {
+  margin-left: 1rem;
+}
+
 #main__count {
   font-size: 3rem;
 }
+
+.count__main {
+  margin: 2rem auto;
+  height: 14rem;
+  width: 14rem;
+  background-color: #ced7dc;
+  border-radius: 10px;
+  color: #3e3a3a;
+}
+
 .count__set {
   display: flex;
   justify-content: space-around;
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
+}
+
+.count__set__select {
+  width: 50%;
+  background-color: #3e3a3a;
+  color: #ced7dc;
+  /* border-radius: 10px; */
+  padding: 1rem;
+  margin-top: 2rem;
 }
 
 .count__down {
   display: flex;
   justify-content: space-around;
-  text-align: center;
+  background-color: #ced7dc;
+  color: #3e3a3a;
+}
+
+.count__down__number {
+  font-size: 2rem;
+}
+
+.count__down__content {
+  margin: 1rem;
+  display: flex;
+  padding: .5rem;
+  height: 30px;
+  width: 40%;
+  line-height: 30px;
+  border-radius: 10px;
+}
+
+.loop__content {
+  color: #ced7dc;
+  background-color: #3e3a3a;
+  padding: 1rem;
+}
+
+.count__button {
+  display: flex;
+}
+
+.button__content {
+  margin: 0 auto;
+  margin-top: 1rem;
+  padding: 1rem;
+  font-size: 1.3rem;
+  border: 1px solid #3e3a3a;
+  color: #3e3a3a;
+  border-radius: 4px;
+  width: 45%;
+}
+
+.select__box {
+  background-color: #e6e5ef;
+  color: #3e3a3a;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+#count__reset {
+  width: 95%;
 }
