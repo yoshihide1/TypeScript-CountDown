@@ -1,17 +1,35 @@
 class NumberSet {
-
-  countSet(): void {
-    const count = document.getElementById('set__work')!
-    for (let i = 10; i <= 120; i += 10) {
+  setMinWork(): void {
+    const count = document.getElementById('set__work__min')!
+    for (let i = 0; i <= 10; i++) {
       const option = document.createElement('option')
       option.text = String(i)
       option.value = String(i)
       count.appendChild(option)
     }
   }
-  intervalSet(): void {
-    const count = document.getElementById('set__interval')!
-    for (let i = 10; i <= 120; i += 10) {
+  setMinInterval(): void {
+    const count = document.getElementById('set__interval__min')!
+    for (let i = 0; i <= 5; i++) {
+      const option = document.createElement('option')
+      option.text = String(i)
+      option.value = String(i)
+      count.appendChild(option)
+    }
+  }
+
+  setSecWork(): void {
+    const count = document.getElementById('set__work__sec')!
+    for (let i = 0; i <= 50; i += 10) {
+      const option = document.createElement('option')
+      option.text = String(i)
+      option.value = String(i)
+      count.appendChild(option)
+    }
+  }
+  setSecInterval(): void {
+    const count = document.getElementById('set__interval__sec')!
+    for (let i = 0; i <= 50; i += 10) {
       const option = document.createElement('option')
       option.text = String(i)
       option.value = String(i)
@@ -20,20 +38,27 @@ class NumberSet {
   }
 }
 const selectNumber = new NumberSet
-selectNumber.intervalSet()
-selectNumber.countSet()
-
+selectNumber.setSecInterval()
+selectNumber.setMinInterval()
+selectNumber.setSecWork()
+selectNumber.setMinWork()
 
 
 abstract class NumberGet {
 
   setWork(): number {
-    const num = (<HTMLInputElement>document.getElementById('set__work')).value
-    return Number(num)
+    let min: string | number = (<HTMLInputElement>document.getElementById('set__work__min')).value
+    let sec: string | number = (<HTMLInputElement>document.getElementById('set__work__sec')).value
+    min = Number(min) * 60
+    sec = Number(sec)
+    return min + sec
   }
   setInterval(): number {
-    const num = (<HTMLInputElement>document.getElementById('set__interval')).value
-    return Number(num)
+    let min: string | number = (<HTMLInputElement>document.getElementById('set__interval__min')).value
+    let sec: string | number = (<HTMLInputElement>document.getElementById('set__interval__sec')).value
+    min = Number(min) * 60
+    sec = Number(sec)
+    return min + sec
   }
   getWork(): HTMLElement {
     const workTime = <HTMLElement>document.getElementById('count__down__work')
@@ -50,6 +75,10 @@ abstract class NumberGet {
   stopElement(): HTMLElement {
     const stopButton = <HTMLElement>document.getElementById('count__stop')
     return stopButton
+  }
+  resetElement(): HTMLElement {
+    const resetButton = <HTMLElement>document.getElementById('count__reset')
+    return resetButton
   }
 
 
@@ -72,7 +101,6 @@ class CountStart extends NumberGet {
       const intervalSecJudge = Number(numberGet.getInterval().innerText)
       startButton.disabled = true
       if (workSecJudge == 0 && intervalSecJudge == 0) {
-        console.log('start222')
         const workSec = numberGet.setWork()
         const intervalSec = numberGet.setInterval()
         this.countDown(workSec, intervalSec)
@@ -81,13 +109,23 @@ class CountStart extends NumberGet {
       }
     })
   }
-  stop(): void {
-    const countStop = numberGet.stopElement()
+  // stop(): void {
+  //   const countStop = numberGet.stopElement()
+  //   const startButton: any = numberGet.startElement()
+  //   countStop.addEventListener('click', () => {
+  //     startButton.disabled = false
+  //     clearInterval(this.work)
+  //     clearInterval(this.interval)
+  //   })
+  // }
+  reset(): void {
+    const countReset = numberGet.resetElement()
     const startButton: any = numberGet.startElement()
-    countStop.addEventListener('click', () => {
+    countReset.addEventListener('click', () => {
+      console.log()
       startButton.disabled = false
-      clearInterval(this.work)
-      clearInterval(this.interval)
+
+
     })
   }
 
@@ -126,6 +164,7 @@ class CountStart extends NumberGet {
 const numberGet = new CountStart()
 numberGet.start()
 numberGet.stop()
+numberGet.reset()
 
 
 
