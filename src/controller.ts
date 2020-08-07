@@ -20,10 +20,12 @@ export class Controller extends CountStart {
         const workSec = super.setWork()
         const intervalSec = super.setInterval()
         this.countDown(workSec, intervalSec)
+        console.log(111)
       } else if (mainCount > 0) {
-
+        console.log(222)
       } else {
         this.countDown(workSecJudge, intervalSecJudge)
+        console.log(333)
       }
     })
   }

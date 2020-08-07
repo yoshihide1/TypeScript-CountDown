@@ -1,12 +1,12 @@
 
-export abstract class ElementGet {
+export  class ElementGet {
   mainCount(): HTMLElement {
     const count = (<HTMLElement>document.getElementById('main__count'))
     return count
   }
-  setLoop() {
+  setLoop(): number {
     let loop = (<HTMLInputElement>document.getElementById('loop')).value
-    return loop
+    return Number(loop)
   }
   setWork(): number {
     let min: string | number = (<HTMLInputElement>document.getElementById('set__work__min')).value
