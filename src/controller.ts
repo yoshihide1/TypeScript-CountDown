@@ -1,5 +1,4 @@
 import { CountStart } from "./countStart"
-
 export class Controller extends CountStart {
   button: any
   constructor() {
@@ -10,25 +9,10 @@ export class Controller extends CountStart {
       reset: super.resetElement()
     }
   }
-  // selectTime (): void {
-  //   super.selectWorkMin().addEventListener('change', () => {
-  //     console.log('aaaa',super.selectWorkMin())
-  //   })
-  //   super.selectWorkSec().addEventListener('change', () => {
-  //     console.log('workSec')
-  //   })
-  //   super.selectIntervalMin().addEventListener('change', () => {
-  //     console.log('intervalMin')
-  //   })
-  //   super.selectIntervalSec().addEventListener('change', () => {
-  //     console.log('intervalSec')
-  //   })
-  // }
   start(): void {
     this.button['start'].addEventListener('click', () => {
       super.disabledButton('start')
-
-
+      super.selectTime('start')
       const mainCount = Number(super.mainCount().innerText)
       const workSecJudge = Number(super.getWork().innerText)
       const intervalSecJudge = Number(super.getInterval().innerText)
@@ -55,6 +39,7 @@ export class Controller extends CountStart {
     this.button['reset'].disabled = true
     this.button['reset'].addEventListener('click', () => {
       super.disabledButton('reset')
+      super.selectTime('reset')
       super.getWork().innerText = "0"
       super.getInterval().innerText = "0"
       super.mainCount().innerText = "0"

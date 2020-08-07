@@ -1,9 +1,10 @@
-import { NumberGet } from './numberGet'
-export class CountStart extends NumberGet {
+import { ElementGet } from './elementGet'
+export class CountStart extends ElementGet {
   work: any
   interval: any
   num: number
   button: any
+  select: any
   constructor() {
     super()
     this.work = 0
@@ -13,6 +14,13 @@ export class CountStart extends NumberGet {
       start: super.startElement(),
       stop: super.stopElement(),
       reset: super.resetElement()
+    }
+    this.select = {
+      workMin: super.workSelectMinElement(),
+      workSec: super.workSelectSecElement(),
+      intervalMin: super.intervalSelectMinElement(),
+      intervalSec: super.intervalSelectSecElement(),
+      loopCount: super.loopCountElement()
     }
   }
   loop(loop?: string): void {
@@ -75,6 +83,25 @@ export class CountStart extends NumberGet {
         this.button['start'].disabled = false
         this.button['stop'].disabled = true
         break
+    }
+  }
+  selectTime(name: string): void {
+    switch (name) {
+      case 'start':
+        this.select['workMin'].disabled = true
+        this.select['workSec'].disabled = true
+        this.select['intervalMin'].disabled = true
+        this.select['intervalSec'].disabled = true
+        this.select['loopCount'].disabled = true
+        break
+      case 'reset':
+        this.select['workMin'].disabled = false
+        this.select['workSec'].disabled = false
+        this.select['intervalMin'].disabled = false
+        this.select['intervalSec'].disabled = false
+        this.select['loopCount'].disabled = false
+        break
+
     }
   }
 }

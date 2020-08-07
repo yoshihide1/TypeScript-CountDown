@@ -29,18 +29,20 @@
   <div class="count__set">
     <div class="count__set__select">
       <p>Work</p>
-      <select id="set__work__min" class="select__box__work"></select>分
-      <select id="set__work__sec" class="select__box__work"></select>秒
+        <select name="select" id="set__work__min" class="select__box__work"></select>分
+        <select name="select" id="set__work__sec" class="select__box__work"></select>秒
     </div>
 
     <div class="count__set__select">
       <p>Interval</p>
-      <select name="" id="set__interval__min" class="select__box__interval"></select>分
-      <select name="" id="set__interval__sec" class="select__box__interval"></select>秒
+      <div id="select__interval">
+        <select name="select"  id="set__interval__min" class="select__box__interval"></select>分
+        <select name="select"  id="set__interval__sec" class="select__box__interval"></select>秒
+      </div>
     </div>
   </div>
   <div class="loop__content">
-    <span>Loop </span><select name="" id="loop" class="select__box"></select>
+    <span>Loop </span><select name="select"  id="loop" class="select__box"></select>
   </div>
   <div class="count__button">
     <button id="count__start" class="button__content">Start</button>
