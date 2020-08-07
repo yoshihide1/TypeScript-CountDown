@@ -1,4 +1,4 @@
-export class NumberSet {
+export class NumberSet {//出力
   setMinWork(): void {
     const count = document.getElementById('set__work__min')!
     for (let i = 0; i <= 10; i++) {

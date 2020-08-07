@@ -4,6 +4,23 @@ export abstract class NumberGet {
     const count = (<HTMLElement>document.getElementById('main__count'))
     return count
   }
+
+  // selectWorkMin() {
+  //   const element = (<HTMLInputElement>document.getElementById('set__work__min')).value
+  //   return element
+  // }
+  // selectWorkSec(): HTMLElement {
+  //   const element = <HTMLInputElement>document.getElementById('set__work__sec')!
+  //   return element
+  // }
+  // selectIntervalMin(): HTMLElement {
+  //   const element = <HTMLInputElement>document.getElementById('set__interval__min')!
+  //   return element
+  // }
+  // selectIntervalSec(): HTMLElement {
+  //   const sec = <HTMLInputElement>document.getElementById('set__interval__sec')!
+  //   return sec
+  // }
   setLoop() {
     let loop = (<HTMLInputElement>document.getElementById('loop')).value
     return loop

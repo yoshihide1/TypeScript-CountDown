@@ -1,12 +1,13 @@
 import { NumberSet } from './numberSet'
-import {CountStart} from './countStart'
+import { Controller } from './controller'
 const selectNumber = new NumberSet()
 selectNumber.setSecInterval()
 selectNumber.setMinInterval()
 selectNumber.setSecWork()
 selectNumber.setMinWork()
 selectNumber.setLoop()
-const countStart = new CountStart()
-countStart.start()
-countStart.stop()
-countStart.reset()
+const controller = new Controller()
+controller.start()
+controller.stop()
+controller.reset()
+// controller.selectTime()
