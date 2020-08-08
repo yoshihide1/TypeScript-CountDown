@@ -1,4 +1,11 @@
 export class NumberSet {//出力
+  constructor() {
+    this.setSecInterval()
+    this.setMinInterval()
+    this.setSecWork()
+    this.setMinWork()
+    this.setLoop()
+  }
   setMinWork(): void {
     const count = document.getElementById('set__work__min')!
     for (let i = 0; i <= 10; i++) {

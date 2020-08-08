@@ -1,52 +1,41 @@
-import { CountStart } from "./countStart"
 import { CountMain } from "./countMain"
-export class Controller extends CountStart {
+import { SetCountView } from "./setCountView"
+export class Controller extends CountMain {
   button: any
+  countMain: any
   constructor() {
     super()
-    this.button = {
-      start: super.startElement(),
-      stop: super.stopElement(),
-      reset: super.resetElement()
-    }
+    this.button['start'].addEventListener('click', this.start.bind(this))
+    this.button['stop'].addEventListener('click', this.stop.bind(this))
+    this.button['reset'].addEventListener('click', this.reset.bind(this))
   }
   start(): void {
-    this.button['start'].addEventListener('click', () => {
-      super.disabledButton('start')
-      super.selectTime('start')
-      const mainCount = Number(super.mainCount().innerText)
-      const workSecJudge = Number(super.getWork().innerText)
-      const intervalSecJudge = Number(super.getInterval().innerText)
-      if (workSecJudge == 0 && intervalSecJudge == 0) {
-        const workSec = super.setWork()
-        const intervalSec = super.setInterval()
-        this.countDown(workSec, intervalSec)
-        console.log(111)
-      } else if (mainCount > 0) {
-        console.log(222)
-      } else {
-        this.countDown(workSecJudge, intervalSecJudge)
-        console.log(333)
-      }
-    })
+    console.log('start')
+    super.disabledButton('start')
+    super.selectTime('start')
+    const work = super.setWork()
+    const interval = super.setInterval()
+    const loop = super.setLoop()
+    if (work === 0 && interval === 0) {
+      alert('時間を指定して下さい')
+    } else {
+      new SetCountView()
+      super.workStart(work, interval, loop)
+    }
   }
   stop(): void {
-    this.button['stop'].disabled = true
-    this.button['stop'].addEventListener('click', () => {
-      super.disabledButton('stop')
-      clearInterval(this.work)
-      clearInterval(this.interval)
-    })
+    console.log('stop')
+    super.disabledButton('stop')
+    super.selectTime('reset')
+    super.intervalStop()
   }
   reset(): void {
-    this.button['reset'].disabled = true
-    this.button['reset'].addEventListener('click', () => {
-      super.disabledButton('reset')
-      super.selectTime('reset')
-      super.getWork().innerText = "0"
-      super.getInterval().innerText = "0"
-      super.mainCount().innerText = "0"
-    })
+    console.log('reset')
+    super.disabledButton('reset')
+    super.selectTime('reset')
+    super.getWork().innerText = "0"
+    super.getInterval().innerText = "0"
+    super.mainCount().innerText = "0"
   }
 
 }
