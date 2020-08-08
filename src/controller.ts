@@ -1,4 +1,5 @@
 import { CountStart } from "./countStart"
+import { CountMain } from "./countMain"
 export class Controller extends CountStart {
   button: any
   constructor() {
