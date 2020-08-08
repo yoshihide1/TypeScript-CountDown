@@ -11,14 +11,15 @@ export class Controller extends CountMain {
   }
   start(): void {
     console.log('start')
-    super.disabledButton('start')
-    super.selectTime('start')
     const work = super.setWork()
     const interval = super.setInterval()
     const loop = super.setLoop()
     if (work === 0 && interval === 0) {
       alert('時間を指定して下さい')
+      return
     } else {
+      super.disabledButton('start')
+      super.selectTime('start')
       new SetCountView()
       super.workStart(work, interval, loop)
     }
