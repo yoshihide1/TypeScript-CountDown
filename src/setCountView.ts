@@ -1,19 +1,18 @@
 import { ElementGet } from "./elementGet";
 
-export class SetCountView extends ElementGet {
+export class SetCountView {
 
   work: string
   interval: string
   constructor(){
-    super()
     this.work = ""
     this.interval = ""
     this.countGet()
   }
   countGet() {
-    this.work = String(super.setWork())
-    this.interval = String(super.setInterval())
-    super.getWork().innerText = this.work
-    super.getInterval().innerText = this.interval
+    this.work = String(ElementGet.setWork())
+    this.interval = String(ElementGet.setInterval())
+    ElementGet.getWork().innerText = this.work
+    ElementGet.getInterval().innerText = this.interval
   }
 }

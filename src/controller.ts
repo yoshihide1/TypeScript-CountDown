@@ -1,19 +1,18 @@
 import { CountMain } from "./countMain"
 import { SetCountView } from "./setCountView"
+import { ElementGet } from "./elementGet"
 export class Controller extends CountMain {
-  button: any
-  countMain: any
   constructor() {
     super()
-    this.button['start'].addEventListener('click', this.start.bind(this))
-    this.button['stop'].addEventListener('click', this.stop.bind(this))
-    this.button['reset'].addEventListener('click', this.reset.bind(this))
+    this.startButton.addEventListener('click', this.start.bind(this))
+    this.stopButton.addEventListener('click', this.stop.bind(this))
+    this.resetButton.addEventListener('click', this.reset.bind(this))
   }
   start(): void {
     console.log('start')
-    const work = super.setWork()
-    const interval = super.setInterval()
-    const loop = super.setLoop()
+    const work = ElementGet.setWork()
+    const interval = ElementGet.setInterval()
+    const loop = ElementGet.setLoop()
     if (work === 0 && interval === 0) {
       alert('時間を指定して下さい')
       return
@@ -27,16 +26,16 @@ export class Controller extends CountMain {
   stop(): void {
     console.log('stop')
     super.disabledButton('stop')
-    super.selectTime('reset')
+    super.selectTime()
     super.intervalStop()
   }
   reset(): void {
     console.log('reset')
     super.disabledButton('reset')
-    super.selectTime('reset')
-    super.getWork().innerText = "0"
-    super.getInterval().innerText = "0"
-    super.mainCount().innerText = "0"
+    super.selectTime()
+    ElementGet.getWork().innerText = "0"
+    ElementGet.getInterval().innerText = "0"
+    ElementGet.mainCount().innerText = "0"
   }
 
 }

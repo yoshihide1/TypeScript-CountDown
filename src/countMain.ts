@@ -1,34 +1,25 @@
 import { ElementGet } from "./elementGet"
 
-export class CountMain extends ElementGet {
-  button: any
-  select: any
+export class CountMain {
+  startButton: HTMLButtonElement
+  stopButton: HTMLButtonElement
+  resetButton: HTMLButtonElement
+  loopCount: number
   workTime: number
   intervalTime: number
   timeLoop: number
-  loopCount: number
   workInterval: any
   intervalInterval: any
   countView: any
   constructor() {
-    super()
     this.countView = ""
     this.workTime = 0
     this.intervalTime = 0
     this.timeLoop = 0
     this.loopCount = 0
-    this.button = {
-      start: super.startElement(),
-      stop: super.stopElement(),
-      reset: super.resetElement()
-    }
-    this.select = {
-      workMin: super.workSelectMinElement(),
-      workSec: super.workSelectSecElement(),
-      intervalMin: super.intervalSelectMinElement(),
-      intervalSec: super.intervalSelectSecElement(),
-      loopCount: super.loopCountElement()
-    }
+    this.startButton = ElementGet.startElement(),
+      this.stopButton = ElementGet.stopElement(),
+      this.resetButton = ElementGet.resetElement()
   }
 
 
@@ -36,7 +27,7 @@ export class CountMain extends ElementGet {
     console.log(work, 'start', interval)
     this.workTime = work
     this.timeLoop = loop
-    this.countView = super.mainCount()
+    this.countView = ElementGet.mainCount()
     this.workInterval = setInterval(() => {
       console.log(this.workTime)
       this.countView.innerHTML = `<p>Work</p><p>${String((this.workTime--))}</p>`
@@ -51,7 +42,7 @@ export class CountMain extends ElementGet {
   intervalStart(work: number, interval: number): void {
     console.log(work, 'intervalStart', interval)
     this.intervalTime = interval
-    this.countView = super.mainCount()
+    this.countView = ElementGet.mainCount()
     this.intervalInterval = setInterval(() => {
       console.log(this.intervalTime)
       this.countView.innerHTML = `<p>Interval</p><p>${String((this.intervalTime--))}</p>`
@@ -82,37 +73,29 @@ export class CountMain extends ElementGet {
   disabledButton(name: string): void {
     switch (name) {
       case 'start':
-        this.button['start'].disabled = true
-        this.button['stop'].disabled = false
-        this.button['reset'].disabled = true
+        this.startButton.disabled = true
+        this.stopButton.disabled = false
+        this.resetButton.disabled = true
         break
       case 'stop':
-        this.button['start'].disabled = false
-        this.button['reset'].disabled = false
-        this.button['stop'].disabled = true
+        this.startButton.disabled = false
+        this.resetButton.disabled = false
+        this.stopButton.disabled = true
         break
       case 'reset':
-        this.button['start'].disabled = false
-        this.button['stop'].disabled = true
+        this.startButton.disabled = false
+        this.stopButton.disabled = true
         break
     }
   }
-  selectTime(name: string): void {
-    switch (name) {
-      case 'start':
-        this.select['workMin'].disabled = true
-        this.select['workSec'].disabled = true
-        this.select['intervalMin'].disabled = true
-        this.select['intervalSec'].disabled = true
-        this.select['loopCount'].disabled = true
-        break
-      case 'reset':
-        this.select['workMin'].disabled = false
-        this.select['workSec'].disabled = false
-        this.select['intervalMin'].disabled = false
-        this.select['intervalSec'].disabled = false
-        this.select['loopCount'].disabled = false
-        break
-    }
+  selectTime(action?: string): void {
+    const select = ElementGet.selectTimeElement()
+    select.forEach(element => {
+      if (action) {
+        element.disabled = true
+      } else {
+        element.disabled = false
+      }
+    })
   }
 }
