@@ -60,7 +60,7 @@ export class CountMain {
     if (this.timeLoop === this.loopCount) {
       console.log('end')
       this.disabledButton('reset')
-      this.selectTime('reset')
+      this.selectTime()
     } else {
       console.log('loop')
       this.workStart(work, interval, this.timeLoop)
