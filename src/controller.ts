@@ -9,7 +9,6 @@ export class Controller extends CountMain {
     this.resetButton.addEventListener('click', this.reset.bind(this))
   }
   start(): void {
-    console.log('start')
     const work = ElementGet.setWork()
     const interval = ElementGet.setInterval()
     const loop = ElementGet.setLoop()
@@ -24,18 +23,15 @@ export class Controller extends CountMain {
     }
   }
   stop(): void {
-    console.log('stop')
     super.disabledButton('stop')
     super.selectTime()
     super.intervalStop()
   }
   reset(): void {
-    console.log('reset')
     super.disabledButton('reset')
     super.selectTime()
     ElementGet.getWork().innerText = "0"
     ElementGet.getInterval().innerText = "0"
     ElementGet.mainCount().innerText = "0"
   }
-
 }
