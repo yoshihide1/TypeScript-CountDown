@@ -7,16 +7,14 @@ export class CountMain {
   loopCount: number = 0
   workTime: number = 0
   intervalTime: number = 0
-  timeLoop: number = 0
   countView: HTMLElement = ElementGet.mainCount()
   workCount?: NodeJS.Timeout
   intervalCount?: NodeJS.Timeout
 
-
   workStart(work: number, interval: number, loop: number): void {
     console.log(work, 'start', interval)
     this.workTime = work
-    this.timeLoop = loop
+    this.loopCount = loop
     this.workCount = setInterval(() => {
       console.log(this.workTime)
       this.countView.innerHTML = `<p>Work</p><p>${String((this.workTime--))}</p>`
@@ -43,15 +41,15 @@ export class CountMain {
     }, 1000)
   }
   loopJudge(work: number, interval: number): void {
-    console.log(work, 'loop', interval)
-    this.loopCount++
-    if (this.timeLoop === this.loopCount) {
+    console.log(work, 'loop', this.loopCount, interval)
+    if (this.loopCount === 0) {
       console.log('end')
       this.disabledButton('reset')
       this.selectTime()
     } else {
       console.log('loop')
-      this.workStart(work, interval, this.timeLoop)
+      this.loopCount--
+      this.workStart(work, interval, this.loopCount)
     }
   }
   intervalStop() {

@@ -44,7 +44,7 @@ export class NumberSet {//出力
   }
   setLoop(): void {
     const loop = document.getElementById('loop')!
-    for (let i = 1; i <= 10; i++) {
+    for (let i = 0; i <= 10; i++) {
       const option = document.createElement('option')
       option.text = String(i)
       option.value = String(i)
