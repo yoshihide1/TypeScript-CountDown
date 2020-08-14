@@ -1,31 +1,123 @@
+type setTime = {
+  workCount: number;
+  intervalCount: number
+}[]
 class Counter {
   constructor(public workTime: number, public intervalTime: number, public loopCount: number) {
     this.setCount()
   }
   setCount(): void {
-    let count: number[] = []
+    let count: setTime = []
     for (let i = 0; i < this.loopCount; i++) {
-      count.push(this.workTime, this.intervalTime)
+      count.push({ workCount: this.workTime, intervalCount: this.intervalTime })
     }
-    console.log(count)
-    this.countDown(count)
+    this.start(count)
   }
 
-
-  countDown(countTime: number[]): void {
-    let count = countTime.shift()!
-    const countDown = setInterval(() => {
-      console.log(count)
-      count--
-      if (countTime.length <= 0) {
-        console.log('end')
-        clearInterval(countDown)
-      } else if (count < 0) {
-          count = countTime.shift()!
-          console.log('length',countTime.length)
-      } 
-    }, 1000)
-
-  }
+start(countTime: setTime) {
+ return this.countDownWork(countTime).then((res) => {
+    console.log(res)
+    console.log(111)
+  })
 }
-new Counter(5, 10, 2)
+  countDownWork(countTime: setTime): Promise<number | void> {
+    console.log(countTime)
+    let {workCount, intervalCount} = countTime.shift()!
+   return new Promise((resolve) => {
+      this.countDownTimer(workCount)
+      resolve()
+    })
+  }
+  
+  countDownInterval(interval: number, countTime: setTime): void {
+    let intervalCount = interval
+    
+  }
+  countDownTimer(count: number) {
+    let countTime = count
+    const countDown = setInterval(() => {
+      console.log(countTime)
+      countTime--
+      if (countTime < 0) {
+        clearInterval(countDown)
+        setTimeout(() => {
+          console.log('return')
+        }, 1500)
+      }
+    }, 1000)
+  }
+
+  sample(num: number): Function {
+    const count = num 
+    return (() => {
+      return count
+    })
+  }
+  //   static test(data: number[], f: Function): void {
+  //     for (let key in data) {
+  //       f(data[key], key)
+  //     }
+  //   }
+  //   static test2(init: number): Function {
+  //     console.log(111)
+  //     let counter = init
+  //     return (() => {
+  //       let countDown = setInterval(() => {
+  //         console.log(counter)
+  //         if (counter <= 0) {
+  //           setTimeout(() => {
+  //             console.log('end')
+  //             clearInterval(countDown)
+  //           }, 1000)
+  //         }
+  //         return --counter
+  //       }, 1000)
+  //     })
+  //   }
+
+  // }
+  // let count = 5
+  // let interval = 3
+  // let loopCount = 3
+  // let cc = Counter.test2(count)
+  // let dd = Counter.test2(interval)
+  // console.log(cc())
+  // const countDown = setInterval(() => {
+  //   if (loopCount === 0) {
+  //     console.log('end')
+  //     clearInterval(countDown)
+  //   } else {
+  //     console.log(cc())
+  //     if (cc() <= 0) {
+  //       console.log(dd())
+  //       if (dd() <= 0) {
+  //         loopCount--
+  //         clearInterval(countDown)
+  //       }
+  //     }
+  //   }
+  // }, 1000)
+
+}
+new Counter(5, 2, 2)
+                          // let arr = [1, 2, 4, 8, 16]
+
+// Counter.test(arr, function (value: number, key: number): void {
+//   console.log(`${key} : ${value}`)
+// })
+
+//  function start(count: number): void {
+//   let countTime = count
+//    const countDown =  setInterval (() => {
+//     countTime--
+//     if (countTime <= 0) {
+//       clearInterval(countDown)
+//     }
+//    }, 1000)
+// }
+  // let t = Counter.test2(30)
+  // console.log(t())
+  // console.log(t())
+  // console.log(t())
+  // console.log(t())
+  // console.log(t())
