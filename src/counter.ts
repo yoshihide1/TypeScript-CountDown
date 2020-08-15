@@ -3,9 +3,36 @@ type setTime = {
   intervalCount: number
 }[]
 class Counter {
+  countTime: number
   constructor(public workTime: number, public intervalTime: number, public loopCount: number) {
-    this.setCount()
+    this.countTime = 0
+    // this.setCount()
+    this.myFunction()
   }
+  countDown(name: string, count: number) {
+    this.countTime = count
+    return new Promise((resolve) => {
+      const timer = setInterval(() => {
+        console.log(this.countTime)
+        this.countTime--
+        if (this.countTime < 0) {
+          clearInterval(timer)
+          setTimeout(() => {
+            return resolve()
+          }, 3000)
+        }
+      }, 1000)
+    })
+  }
+
+  async myFunction() {
+    console.log('start')
+    await this.countDown('work', 10)
+    console.log('interval')
+    await this.countDown('interval', 5)
+    console.log('end')
+  }
+
   setCount(): void {
     let count: setTime = []
     for (let i = 0; i < this.loopCount; i++) {
@@ -14,24 +41,24 @@ class Counter {
     this.start(count)
   }
 
-start(countTime: setTime) {
- return this.countDownWork(countTime).then((res) => {
-    console.log(res)
-    console.log(111)
-  })
-}
+  start(countTime: setTime) {
+    return this.countDownWork(countTime).then((res) => {
+      console.log(res)
+      console.log(111)
+    })
+  }
   countDownWork(countTime: setTime): Promise<number | void> {
     console.log(countTime)
-    let {workCount, intervalCount} = countTime.shift()!
-   return new Promise((resolve) => {
+    let { workCount, intervalCount } = countTime.shift()!
+    return new Promise((resolve) => {
       this.countDownTimer(workCount)
       resolve()
     })
   }
-  
+
   countDownInterval(interval: number, countTime: setTime): void {
     let intervalCount = interval
-    
+
   }
   countDownTimer(count: number) {
     let countTime = count
@@ -48,7 +75,7 @@ start(countTime: setTime) {
   }
 
   sample(num: number): Function {
-    const count = num 
+    const count = num
     return (() => {
       return count
     })
